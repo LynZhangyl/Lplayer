@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/listViewsongs"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6.5" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#000000" >
+
+        <Button
+            android:id="@+id/btnDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/item"
+             />
+
+        <SeekBar
+            android:id="@+id/pbDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="3dip"
+            android:layout_marginTop="3dip"
+            android:layout_toRightOf="@+id/btnDetail"
+            android:max="100"
+            android:progressDrawable="@drawable/seekbar_img"
+            android:thumb="@drawable/media_player_progress_button" />
+
+		<TextView
+		    android:id="@+id/tvCurrentMusic"  
+		    android:layout_width="wrap_content"
+		    android:layout_height="32dip" 
+		    android:layout_alignBaseline="@+id/music_play_next"  
+		    android:layout_below="@+id/pbDuration"
+            android:layout_toRightOf="@+id/btnDetail"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="5dip" 
+            android:paddingRight="5dip" 
+            android:text="歌曲"/>  
+  
+       
+		<Button
+                android:id="@+id/music_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/music_play_next"
+                android:layout_toLeftOf="@+id/music_play_next"
+                android:layout_below="@+id/pbDuration"
+				android:background="@drawable/play1" />
+		
+        <Button
+                android:id="@+id/music_play_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/pbDuration"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/foward" />     
+
+    </RelativeLayout>
+
+</LinearLayout>
