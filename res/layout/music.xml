@@ -14,7 +14,7 @@
         <com.zz.lplayer.util.LrcView
             android:id="@+id/LyricShow"
             android:layout_width="fill_parent"
-            android:layout_height="200dip"
+            android:layout_height="250dip"
             android:layout_below="@+id/linearLayout1"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
@@ -39,14 +39,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="依然爱你"
-                android:textSize="18dp" />
+                android:text="music"
+                android:textSize="18dp"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/music_singer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="王力宏" />
+                android:text="singer" 
+                android:textColor="#ffffff"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"

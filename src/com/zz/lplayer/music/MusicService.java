@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.zz.lplayer.music.R;
+import com.zz.lplayer.dao.latestdao;
 import com.zz.lplayer.domain.Music;
 import com.zz.lplayer.util.LrcProcess;
 import com.zz.lplayer.util.LrcProcess.LrcContent;
@@ -56,7 +57,7 @@ public class MusicService extends Service implements Runnable {
 		lists = MusicList.getMusicData(getApplicationContext());
 
 		SeekBarBroadcastReceiver receiver = new SeekBarBroadcastReceiver();
-		IntentFilter filter = new IntentFilter("cn.com.karl.seekBar");
+		IntentFilter filter = new IntentFilter("com.zz.player.seekBar");
 		this.registerReceiver(receiver, filter);
 		new Thread(this).start();
 		super.onCreate();
@@ -161,14 +162,36 @@ public class MusicService extends Service implements Runnable {
 				// 下一首
 				if (MusicActivity.isLoop == true) {
 					player.reset();
-					Intent intent = new Intent("cn.com.karl.completion");
+					Intent intent = new Intent("com.zz.player.completion");
 					sendBroadcast(intent);
 					_id = _id + 1;
+					/////xiugai
+					MusicActivity.currentId = _id;
+					Music m = lists.get(_id);
+					String musicString = m.getName();
+					String urlString = m.getUrl();
+					latestdao.insertData(urlString, musicString);
+					SongsActivity.music = musicString;
+					SongsActivity.tvCurrentMusic.setText(musicString);
+					LatestActivity.music = musicString;
+					LatestActivity.tvCurrentMusic.setText(musicString);
+					///
 					playMusic(_id);
 				} else { // 单曲播放
 					player.reset();
-					Intent intent = new Intent("cn.com.karl.completion");
+					Intent intent = new Intent("com.zz.player.completion");
 					sendBroadcast(intent);
+					////////xiugai
+					MusicActivity.currentId = _id;
+					Music m = lists.get(_id);
+					String musicString = m.getName();
+					String urlString = m.getUrl();
+					latestdao.insertData(urlString, musicString);
+					SongsActivity.music = musicString;
+					SongsActivity.tvCurrentMusic.setText(musicString);
+					LatestActivity.music = musicString;
+					LatestActivity.tvCurrentMusic.setText(musicString);
+					
 					playMusic(_id);
 				}
 			}
@@ -238,7 +261,7 @@ public class MusicService extends Service implements Runnable {
 			if (null != player) {
 				int position = player.getCurrentPosition();
 				int total = player.getDuration();
-				Intent intent = new Intent("cn.com.karl.progress");
+				Intent intent = new Intent("com.zz.player.progress");
 				intent.putExtra("position", position);
 				intent.putExtra("total", total);
 				sendBroadcast(intent);

@@ -56,7 +56,7 @@ public class MusicActivity extends Activity implements SensorEventListener{
 	private Boolean isPlaying = false;
 	private static int id = 1;
 	//private static int id = 1;
-	private static int currentId = 2;
+	static int currentId = 2;
 	private static Boolean replaying=false;
 	private MyProgressBroadCastReceiver receiver;
 	private MyCompletionListner completionListner;
@@ -139,7 +139,7 @@ public class MusicActivity extends Activity implements SensorEventListener{
 				// TODO Auto-generated method stub
 			
 				seekBar1.setProgress(seekBar.getProgress());
-				Intent intent=new Intent("cn.com.karl.seekBar");
+				Intent intent=new Intent("com.zz.player.seekBar");
 				intent.putExtra("seekBarPosition", seekBar.getProgress());
 				//System.out.println("==========="+seekBar.getProgress());
 				sendBroadcast(intent);
@@ -160,7 +160,7 @@ public class MusicActivity extends Activity implements SensorEventListener{
 			}
 		});
 		 completionListner=new MyCompletionListner();
-		IntentFilter filter=new IntentFilter("cn.com.karl.completion");
+		IntentFilter filter=new IntentFilter("com.zz.player.completion");
 		this.registerReceiver(completionListner, filter);
 	}
 	private class MobliePhoneStateListener extends PhoneStateListener {
@@ -202,7 +202,7 @@ public class MusicActivity extends Activity implements SensorEventListener{
 		// TODO Auto-generated method stub
 		super.onStart();
 		receiver=new MyProgressBroadCastReceiver();
-		IntentFilter filter=new IntentFilter("cn.com.karl.progress");
+		IntentFilter filter=new IntentFilter("com.zz.player.progress");
 		this.registerReceiver(receiver, filter);
 		
 		Intent intent1 = getIntent();
