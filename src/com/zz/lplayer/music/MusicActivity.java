@@ -53,11 +53,11 @@ public class MusicActivity extends Activity implements SensorEventListener{
 	private int currentVolume;// µ±«∞“Ù¡ø
 	private SeekBar seekBarVolume;
 	private List<Music> lists;
-	private Boolean isPlaying = false;
+	static Boolean isPlaying = false;
 	private static int id = 1;
 	//private static int id = 1;
 	static int currentId = 2;
-	private static Boolean replaying=false;
+	static Boolean replaying=false;
 	private MyProgressBroadCastReceiver receiver;
 	private MyCompletionListner completionListner;
 	public static Boolean isLoop=true;
@@ -355,6 +355,9 @@ public class MusicActivity extends Activity implements SensorEventListener{
 					startService(intent);
 					isPlaying = false;
 					imageBtnPlay.setImageResource(R.drawable.play1);
+					SongsActivity.btnStartStop.setImageResource(R.drawable.play1);
+					LatestActivity.btnStartStop.setImageResource(R.drawable.play1);
+					
 					replaying=false;
 				} else {
 					Intent intent = new Intent(MusicActivity.this,
@@ -364,6 +367,9 @@ public class MusicActivity extends Activity implements SensorEventListener{
 					startService(intent);
 					isPlaying = true;
 					imageBtnPlay.setImageResource(R.drawable.pause1);
+					SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
+					LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+					
 					replaying=true;
 				}
 			} else if (v == imageBtnForward) {
@@ -520,4 +526,24 @@ public class MusicActivity extends Activity implements SensorEventListener{
 		}
 	}
 
+	public void PlayorPause() {
+		if (isPlaying == true) {
+			Intent intent = new Intent(MusicActivity.this,
+					MusicService.class);
+			intent.putExtra("play", "pause");
+			startService(intent);
+			isPlaying = false;
+			imageBtnPlay.setImageResource(R.drawable.play1);
+			replaying=false;
+		} else {
+			Intent intent = new Intent(MusicActivity.this,
+					MusicService.class);
+			intent.putExtra("play", "playing");
+			intent.putExtra("id", id);
+			startService(intent);
+			isPlaying = true;
+			imageBtnPlay.setImageResource(R.drawable.pause1);
+			replaying=true;
+		}
+	}
 }

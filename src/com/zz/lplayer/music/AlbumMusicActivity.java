@@ -15,12 +15,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class AlbumMusicActivity extends Activity{
 
+	static ImageButton btnStartStop;
 	private ListView listView;
 	private static int currentID;//当前歌曲ID
 	//private static TextView tvCurrentMusic;
@@ -38,6 +40,11 @@ public class AlbumMusicActivity extends Activity{
 		
 		tvCurrentMusic = (TextView) findViewById(R.id.tvCurrentMusicName);	
 		btnDetail = (Button) findViewById(R.id.btnDetail);
+		btnStartStop = (ImageButton)findViewById(R.id.btnplaypause);
+		if(MusicActivity.isPlaying)
+			btnStartStop.setImageResource(R.drawable.pause1);
+		else
+			btnStartStop.setImageResource(R.drawable.play1);
 		
 		Intent intent1 = getIntent();
         Bundle bundle = intent1.getExtras();//获得参数
@@ -69,6 +76,9 @@ public class AlbumMusicActivity extends Activity{
 				id = MusicList.getIDbyName(getApplicationContext(),music);
 				url = MusicList.getURLbyName(getApplicationContext(), music);
 				latestdao.insertData(url, music);
+				SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
+				LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+				AlbumMusicActivity.btnStartStop.setImageResource(R.drawable.pause1);
 				Intent intent = new Intent(AlbumMusicActivity.this,MusicActivity.class);
 				currentID = Integer.parseInt(id);
 				intent.putExtra("id", currentID);
@@ -79,6 +89,8 @@ public class AlbumMusicActivity extends Activity{
 		btnDetail.setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {
+				if(music==null)
+					music = listMusic.get(0).getName();
 				tvCurrentMusic.setText(music);
 				LatestActivity.tvCurrentMusic.setText(music);
 				SongsActivity.tvCurrentMusic.setText(music);
@@ -89,11 +101,52 @@ public class AlbumMusicActivity extends Activity{
 				url = MusicList.getURLbyName(getApplicationContext(), music);
 				latestdao.insertData(url, music);
 				currentID = Integer.parseInt(id);
+				SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
+				LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+				AlbumMusicActivity.btnStartStop.setImageResource(R.drawable.pause1);
 				Intent intent = new Intent(AlbumMusicActivity.this,MusicActivity.class);
 				intent.putExtra("id", currentID);
 				startActivity(intent);
 			}
 		});	
+		btnStartStop.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				if(music!=null)
+				{
+					if (MusicActivity.isPlaying == true) {
+
+						Intent intent = new Intent(AlbumMusicActivity.this,
+								MusicService.class);
+						intent.putExtra("play", "pause");
+						startService(intent);
+						MusicActivity.isPlaying = false;
+						MusicActivity.imageBtnPlay
+								.setImageResource(R.drawable.play1);
+						MusicActivity.replaying = false;
+						btnStartStop.setImageResource(R.drawable.play1);
+						SongsActivity.btnStartStop.setImageResource(R.drawable.play1);
+						LatestActivity.btnStartStop.setImageResource(R.drawable.play1);
+						AlbumMusicActivity.btnStartStop.setImageResource(R.drawable.play1);
+					} else {
+
+						Intent intent = new Intent(AlbumMusicActivity.this,
+								MusicService.class);
+						intent.putExtra("play", "playing");
+						intent.putExtra("id", id);
+						startService(intent);
+						MusicActivity.isPlaying = true;
+						MusicActivity.imageBtnPlay
+								.setImageResource(R.drawable.pause1);
+						MusicActivity.replaying = true;
+						btnStartStop.setImageResource(R.drawable.pause1);
+						SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
+						LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+						AlbumMusicActivity.btnStartStop.setImageResource(R.drawable.pause1);
+					}
+				}
+			}
+		});
 	}
 
 }

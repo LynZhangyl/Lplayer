@@ -10,6 +10,10 @@ package com.zz.lplayer.music;
 public final class R {
     public static final class anim {
         public static final int alpha_z=0x7f040000;
+        public static final int slide_left_in=0x7f040001;
+        public static final int slide_left_out=0x7f040002;
+        public static final int slide_right_in=0x7f040003;
+        public static final int slide_right_out=0x7f040004;
     }
     public static final class attr {
     }
@@ -27,40 +31,39 @@ public final class R {
         public static final int album=0x7f020000;
         public static final int appbackground=0x7f020001;
         public static final int artist=0x7f020002;
-        public static final int bg=0x7f020003;
-        public static final int button=0x7f020004;
-        public static final int fast_seek_progress=0x7f020005;
-        public static final int foward=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int ic_launcher1=0x7f020008;
-        public static final int icon=0x7f020009;
+        public static final int bg1=0x7f020003;
+        public static final int bg2=0x7f020004;
+        public static final int button=0x7f020005;
+        public static final int fast_seek_progress=0x7f020006;
+        public static final int foward=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int ic_launcher1=0x7f020009;
         public static final int isplaying=0x7f02000a;
         public static final int item=0x7f02000b;
         public static final int latest=0x7f02000c;
         public static final int latest1=0x7f02000d;
         public static final int listbg=0x7f02000e;
-        public static final int listbg1=0x7f02000f;
-        public static final int media_music=0x7f020010;
-        public static final int media_player_progress_bg=0x7f020011;
-        public static final int media_player_progress_button=0x7f020012;
-        public static final int music=0x7f020013;
-        public static final int next=0x7f020014;
-        public static final int next1=0x7f020015;
-        public static final int pause=0x7f020016;
-        public static final int pause1=0x7f020017;
-        public static final int play=0x7f020018;
-        public static final int play1=0x7f020019;
-        public static final int play_loop=0x7f02001a;
-        public static final int play_loop_sel=0x7f02001b;
-        public static final int play_loop_spec=0x7f02001c;
-        public static final int play_random=0x7f02001d;
-        public static final int play_random_sel=0x7f02001e;
-        public static final int rewind=0x7f02001f;
-        public static final int seekbar_img=0x7f020020;
+        public static final int media_music=0x7f02000f;
+        public static final int media_player_progress_bg=0x7f020010;
+        public static final int media_player_progress_button=0x7f020011;
+        public static final int music=0x7f020012;
+        public static final int next=0x7f020013;
+        public static final int next1=0x7f020014;
+        public static final int pause=0x7f020015;
+        public static final int pause1=0x7f020016;
+        public static final int play=0x7f020017;
+        public static final int play1=0x7f020018;
+        public static final int play_loop=0x7f020019;
+        public static final int play_loop_sel=0x7f02001a;
+        public static final int play_loop_spec=0x7f02001b;
+        public static final int play_random=0x7f02001c;
+        public static final int play_random_sel=0x7f02001d;
+        public static final int rewind=0x7f02001e;
+        public static final int seekbar_img=0x7f02001f;
     }
     public static final class id {
         public static final int LyricShow=0x7f090009;
-        public static final int action_settings=0x7f090022;
+        public static final int action_settings=0x7f090023;
         public static final int albumListView=0x7f090003;
         public static final int album_item_name=0x7f090001;
         public static final int album_item_number=0x7f090002;
@@ -69,6 +72,7 @@ public final class R {
         public static final int artistListView=0x7f090004;
         public static final int artist_item_name=0x7f090005;
         public static final int btnDetail=0x7f09001d;
+        public static final int btnplaypause=0x7f09001f;
         public static final int linearLayout1=0x7f09000a;
         public static final int listAllMusic=0x7f090008;
         public static final int listViewlatest=0x7f090007;
@@ -84,15 +88,15 @@ public final class R {
         public static final int music_name=0x7f09000b;
         public static final int music_next=0x7f090017;
         public static final int music_play=0x7f090015;
-        public static final int music_play_next=0x7f090021;
+        public static final int music_play_next=0x7f090022;
         public static final int music_random=0x7f09000f;
         public static final int music_rewind=0x7f090014;
         public static final int music_seekBar=0x7f090011;
         public static final int music_singer=0x7f09000c;
         public static final int music_start_time=0x7f090010;
         public static final int music_volume=0x7f09000e;
-        public static final int pbDuration=0x7f09001f;
-        public static final int tvCurrentMusic=0x7f090020;
+        public static final int pbDuration=0x7f090020;
+        public static final int tvCurrentMusic=0x7f090021;
         public static final int tvCurrentMusicName=0x7f09001e;
     }
     public static final class layout {
