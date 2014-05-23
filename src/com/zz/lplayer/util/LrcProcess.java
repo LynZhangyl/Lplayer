@@ -14,10 +14,12 @@ import java.util.List;
  */
 public class LrcProcess {
 
-	private List<LrcContent> LrcList;
+	private List<LrcContent> LrcList; //List集合存放歌词内容对象  
 
-	private LrcContent mLrcContent;
-
+	private LrcContent mLrcContent;  //声明一个歌词内容对象
+	/*
+	 * 无参构造函数，用来实例化对象
+	 */
 	public LrcProcess() {
 
 		mLrcContent = new LrcContent();
@@ -37,7 +39,7 @@ public class LrcProcess {
 
 		try {
 			FileInputStream fis = new FileInputStream(f);
-			InputStreamReader isr = new InputStreamReader(fis, "GB2312");
+			InputStreamReader isr = new InputStreamReader(fis, "utf-8");
 			BufferedReader br = new BufferedReader(isr);
 			String s = "";
 			while ((s = br.readLine()) != null) {
@@ -123,15 +125,15 @@ public class LrcProcess {
 	 * 获得歌词和时间并返回的类
 	 */
 	public class LrcContent {
-		private String Lrc;
-		private int Lrc_time;
+		private String Lrc; //歌词内容
+		private int Lrc_time;//g歌词当前时间
 
 		public String getLrc() {
 			return Lrc;
 		}
 
 		public void setLrc(String lrc) {
-			Lrc = lrc;
+			this.Lrc = lrc;
 		}
 
 		public int getLrc_time() {
@@ -139,7 +141,7 @@ public class LrcProcess {
 		}
 
 		public void setLrc_time(int lrc_time) {
-			Lrc_time = lrc_time;
+			this.Lrc_time = lrc_time;
 		}
 	}
 

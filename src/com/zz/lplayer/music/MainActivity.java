@@ -33,11 +33,11 @@ public class MainActivity extends TabActivity {
 	private GestureDetector gestureDetector;
 	View.OnTouchListener gestureListener;
 	int currentView = 0;
-	private static int maxTabIndex = 2;
+	private static int maxTabIndex = 3;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.v("test","MainActivity OnCreate");
+		//Log.v("test","MainActivity OnCreate");
 		super.onCreate(savedInstanceState);
 //		requestWindowFeature(Window.FEATURE_NO_TITLE);// 用于全屏显示
 //		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -101,7 +101,7 @@ public class MainActivity extends TabActivity {
 				// right to left swipe
 				if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
 						&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-					Log.i("test", "right");
+					//Log.i("test", "right");
 					if (currentView == maxTabIndex) {
 						currentView = 0;
 					} else {
@@ -110,7 +110,7 @@ public class MainActivity extends TabActivity {
 					tabHost.setCurrentTab(currentView);
 				} else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
 						&& Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-					Log.i("test", "left");
+					//Log.i("test", "left");
 					if (currentView == 0) {
 						currentView = maxTabIndex;
 					} else {

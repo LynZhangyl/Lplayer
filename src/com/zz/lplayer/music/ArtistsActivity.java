@@ -23,7 +23,7 @@ public class ArtistsActivity extends Activity {
 	private ListView artistListView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.v("test","AritistActivity OnCreate");
+		//Log.v("test","AritistActivity OnCreate");
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.artist);
@@ -39,7 +39,7 @@ public class ArtistsActivity extends Activity {
 				// TODO Auto-generated method stub
 				TextView tView=(TextView)arg1.findViewById(R.id.artist_item_name);
 				String artist = tView.getText().toString();
-				Log.v("test","ArtistsActivity "+artist);
+				//Log.v("test","ArtistsActivity "+artist);
 				Intent intent = new Intent(ArtistsActivity.this,
 						ArtistMusicActivity.class);
 				intent.putExtra("artist", artist);

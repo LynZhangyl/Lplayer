@@ -18,13 +18,13 @@ import android.widget.TextView;
  */
 public class LrcView extends TextView {
 
-	private float width;
-	private float high;
-	private Paint CurrentPaint;
-	private Paint NotCurrentPaint;
-	private float TextHigh = 25;
-	private float TextSize = 18;
-	private int Index = 0;
+	private float width; //歌词试图宽度
+	private float high; 	//歌词视图高度
+	private Paint CurrentPaint; //当前画笔对象
+	private Paint NotCurrentPaint;//非当前画笔对象
+	private float TextHigh = 25; //文本高度
+	private float TextSize = 18;//文本大小
+	private int Index = 0; //list集合下标
 
 	private List<LrcContent> mSentenceEntities = new ArrayList<LrcContent>();
 
@@ -52,12 +52,12 @@ public class LrcView extends TextView {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		setFocusable(true);
+		setFocusable(true); //设置可对焦
 
 		// 高亮部分
 		CurrentPaint = new Paint();
-		CurrentPaint.setAntiAlias(true);
-		CurrentPaint.setTextAlign(Paint.Align.CENTER);
+		CurrentPaint.setAntiAlias(true); //设置抗锯齿，让文字美观饱满
+		CurrentPaint.setTextAlign(Paint.Align.CENTER);//设置文本对齐方式  
 
 		// 非高亮部分
 		NotCurrentPaint = new Paint();
@@ -106,10 +106,13 @@ public class LrcView extends TextView {
 						tempY, NotCurrentPaint);
 			}
 		} catch (Exception e) {
-			setText("...木有歌词文件，赶紧去下载...");
+			setText("...无歌词文件，赶紧去下载...");
 		}
 	}
-
+	/*
+	 * 当view大小改变的时候调用的方法
+	 *
+	 */
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		// TODO Auto-generated method stub

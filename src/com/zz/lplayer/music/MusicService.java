@@ -3,6 +3,7 @@ package com.zz.lplayer.music;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.zz.lplayer.music.R;
 import com.zz.lplayer.dao.latestdao;
@@ -154,7 +155,7 @@ public class MusicService extends Service implements Runnable {
 		}
 
 		player.start();
-		player.setOnCompletionListener(new OnCompletionListener() {
+		player.setOnCompletionListener(new OnCompletionListener() {//一首歌播放完毕
 
 			@Override
 			public void onCompletion(MediaPlayer mp) {
@@ -165,7 +166,11 @@ public class MusicService extends Service implements Runnable {
 					Intent intent = new Intent("com.zz.player.completion");
 					sendBroadcast(intent);
 					_id = _id + 1;
-					/////xiugai
+					if(_id>=lists.size()-1){
+						_id=lists.size()-1;
+					}else if(_id<=0){
+						_id=0;
+					}
 					MusicActivity.currentId = _id;
 					Music m = lists.get(_id);
 					String musicString = m.getName();
@@ -175,13 +180,13 @@ public class MusicService extends Service implements Runnable {
 					SongsActivity.tvCurrentMusic.setText(musicString);
 					LatestActivity.music = musicString;
 					LatestActivity.tvCurrentMusic.setText(musicString);
-					///
 					playMusic(_id);
-				} else { // 单曲播放
+				} 
+				else if(MusicActivity.isSingle ==true){ // 单曲播放
 					player.reset();
 					Intent intent = new Intent("com.zz.player.completion");
 					sendBroadcast(intent);
-					////////xiugai
+					
 					MusicActivity.currentId = _id;
 					Music m = lists.get(_id);
 					String musicString = m.getName();
@@ -191,7 +196,30 @@ public class MusicService extends Service implements Runnable {
 					SongsActivity.tvCurrentMusic.setText(musicString);
 					LatestActivity.music = musicString;
 					LatestActivity.tvCurrentMusic.setText(musicString);
+					playMusic(_id);
+				}
+				else{//随机播放
+					player.reset();
+					Intent intent = new Intent("com.zz.player.completion");
+					sendBroadcast(intent);
+					Random random = new Random();
+					_id = ( random.nextInt(lists.size()))%(lists.size());
+					//Log.v("test",_id+" "+random.nextInt()+" "+lists.size());
+					if(_id>=lists.size()-1){
+						_id=lists.size()-1;
+					}else if(_id<=0){
+						_id=0;
+					}
 					
+					MusicActivity.currentId = _id;
+					Music m = lists.get(_id);
+					String musicString = m.getName();
+					String urlString = m.getUrl();
+					latestdao.insertData(urlString, musicString);
+					SongsActivity.music = musicString;
+					SongsActivity.tvCurrentMusic.setText(musicString);
+					LatestActivity.music = musicString;
+					LatestActivity.tvCurrentMusic.setText(musicString);
 					playMusic(_id);
 				}
 			}

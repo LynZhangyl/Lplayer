@@ -27,17 +27,17 @@ public class AlbumList {
 			Music m = iterator.next();//得到每一首歌
 			
 			String albumname = m.getAlbum();
-			Log.i("singer",albumname);
+			//Log.i("singer",albumname);
 			boolean find = false;
 			Iterator<Album> iterator2 = albumsList.iterator();
 			
 			while(iterator2.hasNext()){
 				Album album = iterator2.next();
 				String name = album.getAlbumName();
-				Log.i("singer",name+" 对比");
+				//Log.i("singer",name+" 对比");
 				if(name.equals(albumname))
 				{
-					Log.i("singer", "相等");
+					//Log.i("singer", "相等");
 					find =true;
 					album.addMusic(m);
 					album.setAccount(album.getAccount()+1);
@@ -46,7 +46,7 @@ public class AlbumList {
 			}
 			if(!find)
 			{
-				Log.i("singer", albumname+"添加");
+				//Log.i("singer", albumname+"添加");
 				Album newAlbum = new Album();
 				newAlbum.setAlbumName(albumname);
 				newAlbum.setAccount(1);

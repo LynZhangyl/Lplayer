@@ -68,7 +68,7 @@ public class MusicList {
 		return musicList;
 	}
 	public static List<Music> getArtistMusicData(Context context,String artist) {
-		Log.v("test","MusicList "+artist);
+		//Log.v("test","MusicList "+artist);
 		List<Music> musicList = new ArrayList<Music>();
 		ContentResolver cr = context.getContentResolver();
 		if (cr != null) {
@@ -92,7 +92,7 @@ public class MusicList {
 					//Log.e("--------------", sbr);
 					
 					if (sbr.equals("mp3") && singer.equals(artist)) {
-						Log.v("test","MusicList "+artist+ "  "+ singer);
+						//Log.v("test","MusicList "+artist+ "  "+ singer);
 						String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
 						String album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));
 						long size = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.SIZE));
@@ -114,7 +114,7 @@ public class MusicList {
 		return musicList;
 	}
 	public static List<Music> getAlbumMusicData(Context context,String albumS) {
-		Log.v("test","MusicList"+albumS);
+		//Log.v("test","MusicList"+albumS);
 		List<Music> musicList = new ArrayList<Music>();
 		
 		ContentResolver cr = context.getContentResolver();
@@ -137,7 +137,7 @@ public class MusicList {
 					//Log.e("--------------", sbr);
 					
 					if (sbr.equals("mp3") && album.equals(albumS)) {
-						Log.v("test","Album & AlbumS"+album+ "  "+ albumS);
+						//Log.v("test","Album & AlbumS"+album+ "  "+ albumS);
 						String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
 						String singer = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
 						if ("<unknown>".equals(singer)) {
@@ -164,7 +164,7 @@ public class MusicList {
 		
 		String []latestStrings = new String[10];
 		latestStrings = latestdao.latestlist();//获得最近播放的歌曲的url
-		Log.v("test", "MusicList StringSize " + latestStrings.length);
+		//Log.v("test", "MusicList StringSize " + latestStrings.length);
 		List<Music> musicList = new ArrayList<Music>();
 		ContentResolver cr = context.getContentResolver();
 		if (cr != null) {
@@ -237,7 +237,7 @@ public class MusicList {
 			String nameString = music.getName();
 			if(nameString.equals(musicname))
 			{
-				Log.v("test","MusicList " + id);
+				//Log.v("test","MusicList " + id);
 				return String.valueOf(id);
 			}
 		}
@@ -252,7 +252,7 @@ public class MusicList {
 			String nameString = music.getName();
 			if(nameString.equals(musicname))
 			{
-				Log.v("test","MusicList getURL " + music.getUrl());
+				//Log.v("test","MusicList getURL " + music.getUrl());
 				return music.getUrl();
 			}
 		}

@@ -43,8 +43,9 @@ public class MusicActivity extends Activity implements SensorEventListener{
 	public static ImageButton imageBtnPlay;
 	private ImageButton imageBtnForward;
 	private ImageButton imageBtnNext;
-	private ImageButton imageBtnLoop;
-	private ImageButton imageBtnRandom;
+	//private ImageButton imageBtnLoop;
+	//private ImageButton imageBtnRandom;
+	private ImageButton imageBtnPlayModel;
 	public static LrcView lrc_view;
 	private ImageView icon;
 	private SeekBar seekBar1;
@@ -61,6 +62,8 @@ public class MusicActivity extends Activity implements SensorEventListener{
 	private MyProgressBroadCastReceiver receiver;
 	private MyCompletionListner completionListner;
 	public static Boolean isLoop=true;
+	public static Boolean isRandom = false;
+	public static Boolean isSingle = false;
 	private SensorManager sensorManager;
 	private boolean mRegisteredSensor;
 	private String musicString;
@@ -86,9 +89,11 @@ public class MusicActivity extends Activity implements SensorEventListener{
 		imageBtnPlay = (ImageButton) this.findViewById(R.id.music_play);
 		imageBtnForward = (ImageButton) this.findViewById(R.id.music_foward);
 		imageBtnNext = (ImageButton) this.findViewById(R.id.music_next);
-		imageBtnLoop = (ImageButton) this.findViewById(R.id.music_loop);
+		//imageBtnLoop = (ImageButton) this.findViewById(R.id.music_loop);
 		seekBarVolume = (SeekBar) this.findViewById(R.id.music_volume);
-		imageBtnRandom = (ImageButton) this.findViewById(R.id.music_random);
+		imageBtnPlayModel = (ImageButton)this.findViewById(R.id.music_playmodel);
+		//imageBtnRandom = (ImageButton) this.findViewById(R.id.music_random);
+		
 		lrc_view = (LrcView) findViewById(R.id.LyricShow);
 		
 		imageBtnLast.setOnClickListener(new MyListener());
@@ -96,8 +101,9 @@ public class MusicActivity extends Activity implements SensorEventListener{
 		imageBtnPlay.setOnClickListener(new MyListener());
 		imageBtnForward.setOnClickListener(new MyListener());
 		imageBtnNext.setOnClickListener(new MyListener());
-		imageBtnLoop.setOnClickListener(new MyListener());
-		imageBtnRandom.setOnClickListener(new MyListener());
+		//imageBtnLoop.setOnClickListener(new MyListener());
+		//imageBtnRandom.setOnClickListener(new MyListener());
+		imageBtnPlayModel.setOnClickListener(new MyListener());
 		sensorManager=(SensorManager) getSystemService(SENSOR_SERVICE);
 
 		lists = MusicList.getMusicData(this);
@@ -210,7 +216,7 @@ public class MusicActivity extends Activity implements SensorEventListener{
         id = bundle.getInt("id");
         
 		//id = getIntent().getIntExtra("id", 1);
-		Log.v("test","MusicActivity onStart() " + id);
+		//Log.v("test","MusicActivity onStart() " + id);
 		if (id == currentId) {
 			Music m = lists.get(id);
 			textName.setText(m.getTitle());
@@ -250,12 +256,23 @@ public class MusicActivity extends Activity implements SensorEventListener{
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
+		if(isLoop)
+		{
+			imageBtnPlayModel.setBackgroundResource(R.drawable.play_loop_sel);
+		}
+		else if(isSingle)
+		{
+			imageBtnPlayModel.setBackgroundResource(R.drawable.play_loop_spec);
+		}
+		else {
+			imageBtnPlayModel.setBackgroundResource(R.drawable.play_random_sel);
+		}
 		super.onResume();
 		List<Sensor> sensors=sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
 		if(sensors.size()>0){
 			Sensor sensor=sensors.get(0);
 			mRegisteredSensor=sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
-			Log.e("--------------", sensor.getName());
+			//Log.e("--------------", sensor.getName());
 		}
 	}
 	@Override
@@ -347,7 +364,7 @@ public class MusicActivity extends Activity implements SensorEventListener{
 				startService(intent);
 				isPlaying = true;
 			} else if (v == imageBtnPlay) {
-				// 正在播放
+				// 正在播放，点暂停播放按钮
 				if (isPlaying == true) {
 					Intent intent = new Intent(MusicActivity.this,
 							MusicService.class);
@@ -355,8 +372,8 @@ public class MusicActivity extends Activity implements SensorEventListener{
 					startService(intent);
 					isPlaying = false;
 					imageBtnPlay.setImageResource(R.drawable.play1);
-					SongsActivity.btnStartStop.setImageResource(R.drawable.play1);
-					LatestActivity.btnStartStop.setImageResource(R.drawable.play1);
+					SongsActivity.btnStartStop.setBackgroundResource(R.drawable.play4);
+					LatestActivity.btnStartStop.setBackgroundResource(R.drawable.play4);
 					
 					replaying=false;
 				} else {
@@ -367,8 +384,8 @@ public class MusicActivity extends Activity implements SensorEventListener{
 					startService(intent);
 					isPlaying = true;
 					imageBtnPlay.setImageResource(R.drawable.pause1);
-					SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
-					LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+					SongsActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
+					LatestActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
 					
 					replaying=true;
 				}
@@ -424,21 +441,33 @@ public class MusicActivity extends Activity implements SensorEventListener{
 				intent.putExtra("id", id);
 				startService(intent);
 				isPlaying = true;
-			} else if (v == imageBtnLoop) {
-				if (isLoop == true) {
-					// 顺序播放
-					imageBtnLoop
-							.setBackgroundResource(R.drawable.play_loop_spec);
+			} 
+			else if (v == imageBtnPlayModel) {
+				if(isLoop){//此时正循环播放，改为单曲循环
+					isSingle = true;
 					isLoop = false;
-				} else {
-					// 单曲播放
-					imageBtnLoop
-							.setBackgroundResource(R.drawable.play_loop_sel);
-					isLoop = true;
+					isRandom = false;
+					imageBtnPlayModel
+							.setBackgroundResource(R.drawable.play_loop_spec);//设置图标为单曲循环	
 				}
-			} else if (v == imageBtnRandom) {
-				imageBtnRandom.setImageResource(R.drawable.play_random_sel);
-			}
+				else if (isSingle ) {//此时单曲循环，改为随机播放
+					
+					isSingle = false;
+					isLoop = false;
+					isRandom = true;
+					imageBtnPlayModel
+							.setBackgroundResource(R.drawable.play_random_sel);//设置图标为随机播放
+				}
+				else if (isRandom ) {//此时随机播放，改为循环播放
+					
+					isSingle = false;
+					isLoop = true;
+					isRandom = false;
+					imageBtnPlayModel
+							.setBackgroundResource(R.drawable.play_loop_sel);//设置图标为循环
+				}
+			} 
+			
 
 		}
 	}
@@ -496,7 +525,7 @@ public class MusicActivity extends Activity implements SensorEventListener{
 			double x=event.values[SensorManager.DATA_X];
 			double y=event.values[SensorManager.DATA_Y];
 			double z=event.values[SensorManager.DATA_Z];
-			Log.e("---------------", "x="+x+"   y="+y+"   z="+z);
+			//Log.e("---------------", "x="+x+"   y="+y+"   z="+z);
 			float speed = (float) (Math.abs(x+y+z - last_x - last_y - last_z) / diffTime * 10000);   			  
 			if (speed > SHAKE_THRESHOLD) {   
                         //检测到摇晃后执行的代码

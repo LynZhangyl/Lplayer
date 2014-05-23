@@ -37,18 +37,18 @@ public class SongsActivity extends Activity{
 	public static  String music =null;
 	private String id;
 	private String url;
-	static ImageButton btnStartStop;
+	static Button btnStartStop;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.v("test","SongsActivity OnCreate");
+		//Log.v("test","SongsActivity OnCreate");
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.songs);
 		tvCurrentMusic = (TextView) findViewById(R.id.tvCurrentMusicName);	
 		tvCurrentMusic.setText(music);
 		btnDetail = (Button) findViewById(R.id.btnDetail);
-		btnStartStop = (ImageButton)findViewById(R.id.btnplaypause);
+		btnStartStop = (Button)findViewById(R.id.btnplaypause);
 	
 		listView= (ListView) this.findViewById(R.id.listViewsongs);
 		listMusic=MusicList.getMusicData(getApplicationContext());//
@@ -71,10 +71,10 @@ public class SongsActivity extends Activity{
 				
 				url = MusicList.getURLbyName(getApplicationContext(), music);
 				id = MusicList.getIDbyName(getApplicationContext(), music);
-				Log.v("test","SongsActivity getURL "+ url);
+				//Log.v("test","SongsActivity getURL "+ url);
 				latestdao.insertData(url, music);
-				SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
-				LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+				SongsActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
+				LatestActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
 				Intent intent = new Intent(SongsActivity.this,MusicActivity.class);
 				currentID = Integer.parseInt(id);
 				intent.putExtra("id", currentID);
@@ -96,8 +96,8 @@ public class SongsActivity extends Activity{
 				id = MusicList.getIDbyName(getApplicationContext(), music);
 				latestdao.insertData(url, music);
 				
-				SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
-				LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+				SongsActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
+				LatestActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
 				Intent intent = new Intent(SongsActivity.this,MusicActivity.class);
 				currentID = Integer.parseInt(id);
 				intent.putExtra("id", currentID);
@@ -120,9 +120,9 @@ public class SongsActivity extends Activity{
 						MusicActivity.imageBtnPlay
 								.setImageResource(R.drawable.play1);
 						MusicActivity.replaying = false;
-						btnStartStop.setImageResource(R.drawable.play1);
-						SongsActivity.btnStartStop.setImageResource(R.drawable.play1);
-						LatestActivity.btnStartStop.setImageResource(R.drawable.play1);
+						//btnStartStop.setImageResource(R.drawable.play4);
+						SongsActivity.btnStartStop.setBackgroundResource(R.drawable.play4);
+						LatestActivity.btnStartStop.setBackgroundResource(R.drawable.play4);
 						
 					} else {
 
@@ -135,9 +135,9 @@ public class SongsActivity extends Activity{
 						MusicActivity.imageBtnPlay
 								.setImageResource(R.drawable.pause1);
 						MusicActivity.replaying = true;
-						btnStartStop.setImageResource(R.drawable.pause1);
-						SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
-						LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);					
+						//btnStartStop.setImageResource(R.drawable.pause4);
+						SongsActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
+						LatestActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);					
 					}
 				}
 			}

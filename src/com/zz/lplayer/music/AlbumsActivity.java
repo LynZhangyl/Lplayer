@@ -20,7 +20,7 @@ public class AlbumsActivity extends Activity {
 	private ListView albumListView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.v("test","AlbumActivity OnCreate");
+		//Log.v("test","AlbumActivity OnCreate");
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.albums);
@@ -40,7 +40,7 @@ public class AlbumsActivity extends Activity {
 //				startActivity(intent);
 				TextView tView=(TextView)arg1.findViewById(R.id.album_item_name);
 				String album = tView.getText().toString();
-				Log.v("test","AlbumsActivity"+album);
+				//Log.v("test","AlbumsActivity"+album);
 				Intent intent = new Intent(AlbumsActivity.this,AlbumMusicActivity.class);
 				intent.putExtra("album", album);
 				startActivity(intent);

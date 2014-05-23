@@ -26,7 +26,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class LatestActivity extends Activity {
 	
-	public static  ImageButton btnStartStop;
+	public static  Button btnStartStop;
 	private static int currentID;//µ±Ç°¸èÇúID
 	private ListView listView;
 	//private static TextView tvCurrentMusic;
@@ -38,10 +38,10 @@ public class LatestActivity extends Activity {
 	private String url;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.v("test","LatestActivity OnCreate");
+		//Log.v("test","LatestActivity OnCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.songs);
-		btnStartStop = (ImageButton)findViewById(R.id.btnplaypause);
+		btnStartStop = (Button)findViewById(R.id.btnplaypause);
 		tvCurrentMusic = (TextView) findViewById(R.id.tvCurrentMusicName);	
 		tvCurrentMusic.setText(music);
 		
@@ -69,8 +69,8 @@ public class LatestActivity extends Activity {
 				id = MusicList.getIDbyName(getApplicationContext(),music);
 				url = MusicList.getURLbyName(getApplicationContext(), music);
 				latestdao.insertData(url, music);
-				SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
-				LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+				SongsActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
+				LatestActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
 				Intent intent = new Intent(LatestActivity.this,MusicActivity.class);
 				currentID = Integer.parseInt(id);
 				intent.putExtra("id", currentID);
@@ -90,8 +90,8 @@ public class LatestActivity extends Activity {
 				id = MusicList.getIDbyName(getApplicationContext(),music);
 				url = MusicList.getURLbyName(getApplicationContext(), music);
 				latestdao.insertData(url, music);
-				SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
-				LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+				SongsActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
+				LatestActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
 				
 				Intent intent = new Intent(LatestActivity.this,MusicActivity.class);
 				currentID = Integer.parseInt(id);
@@ -114,9 +114,9 @@ public class LatestActivity extends Activity {
 						MusicActivity.imageBtnPlay
 								.setImageResource(R.drawable.play1);
 						MusicActivity.replaying = false;
-						btnStartStop.setBackgroundResource(R.drawable.play1);
-						SongsActivity.btnStartStop.setImageResource(R.drawable.play1);
-						LatestActivity.btnStartStop.setImageResource(R.drawable.play1);
+						//btnStartStop.setBackgroundResource(R.drawable.play4);
+						SongsActivity.btnStartStop.setBackgroundResource(R.drawable.play4);
+						LatestActivity.btnStartStop.setBackgroundResource(R.drawable.play4);
 					} else {
 
 						Intent intent = new Intent(LatestActivity.this,
@@ -128,9 +128,9 @@ public class LatestActivity extends Activity {
 						MusicActivity.imageBtnPlay
 								.setImageResource(R.drawable.pause1);
 						MusicActivity.replaying = true;
-						btnStartStop.setBackgroundResource(R.drawable.pause1);
-						SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
-						LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+						//btnStartStop.setBackgroundResource(R.drawable.pause1);
+						SongsActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
+						LatestActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
 					}
 				}
 			}
@@ -162,8 +162,8 @@ public class LatestActivity extends Activity {
 				id = MusicList.getIDbyName(getApplicationContext(),music);
 				url = MusicList.getURLbyName(getApplicationContext(), music);
 				latestdao.insertData(url, music);
-				SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
-				LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+				SongsActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
+				LatestActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
 				Intent intent = new Intent(LatestActivity.this,MusicActivity.class);
 				currentID = Integer.parseInt(id);
 				intent.putExtra("id", currentID);
@@ -182,8 +182,8 @@ public class LatestActivity extends Activity {
 				SongsActivity.tvCurrentMusic.setText(music);
 				id = MusicList.getIDbyName(getApplicationContext(),music);
 				url = MusicList.getURLbyName(getApplicationContext(), music);
-				SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
-				LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+				SongsActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
+				LatestActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
 				Intent intent = new Intent(LatestActivity.this,MusicActivity.class);
 				currentID = Integer.parseInt(id);
 				intent.putExtra("id", currentID);
@@ -205,9 +205,9 @@ public class LatestActivity extends Activity {
 						MusicActivity.imageBtnPlay
 								.setImageResource(R.drawable.play1);
 						MusicActivity.replaying = false;
-						btnStartStop.setImageResource(R.drawable.play1);
-						SongsActivity.btnStartStop.setImageResource(R.drawable.play1);
-						LatestActivity.btnStartStop.setImageResource(R.drawable.play1);
+						//btnStartStop.setImageResource(R.drawable.play1);
+						SongsActivity.btnStartStop.setBackgroundResource(R.drawable.play4);
+						LatestActivity.btnStartStop.setBackgroundResource(R.drawable.play4);
 					} else {
 
 						Intent intent = new Intent(LatestActivity.this,
@@ -219,9 +219,9 @@ public class LatestActivity extends Activity {
 						MusicActivity.imageBtnPlay
 								.setImageResource(R.drawable.pause1);
 						MusicActivity.replaying = true;
-						btnStartStop.setImageResource(R.drawable.pause1);
-						SongsActivity.btnStartStop.setImageResource(R.drawable.pause1);
-						LatestActivity.btnStartStop.setImageResource(R.drawable.pause1);
+						//btnStartStop.setImageResource(R.drawable.pause1);
+						SongsActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
+						LatestActivity.btnStartStop.setBackgroundResource(R.drawable.pause4);
 					}
 				}
 			}

@@ -16,13 +16,13 @@ public class latestdao  {
 	public  latestdao(Context context) {
 		helper=new dbOpenHelper(context);
 		
-		Log.v("test","latestdao Construct");
+		//Log.v("test","latestdao Construct");
 	}
 	
 	// LatestList.insertData(fullPath);在每一个点击进行播放的listener里添加这句进行最近播放列表的插入操作
 	
 	public static void insertData(String fullPath,String name) { 
-		Log.v("test","latestdao URL " +fullPath);
+		//Log.v("test","latestdao URL " +fullPath);
 		
 		db=helper.getWritableDatabase();
         // 先判断数据库中是否有这条数据  
@@ -33,16 +33,16 @@ public class latestdao  {
        // String string;
        Cursor cursor =db.rawQuery(sql1, new String[] {String.valueOf(fullPath)} );
        int num=cursor.getCount();
-       Log.v("test","latestdao insert get num "+ num);
+     //  Log.v("test","latestdao insert get num "+ num);
        if (num!=0){
     	  //找到了删除后再添加
     	  db.execSQL(sql2);
-    	  Log.v("test","latestdao exec sql2 " +sql2);
+    	//  Log.v("test","latestdao exec sql2 " +sql2);
     	  db.execSQL(sql3);  
       }
       else{
     	  //找不到直接insert 这个fullpath
-    	  Log.v("test","exec "+ sql3);
+    	//  Log.v("test","exec "+ sql3);
     	  db.execSQL(sql3);
     	  
       }
@@ -58,7 +58,7 @@ public class latestdao  {
 		String[] columns ={"mpath"};
 	 Cursor cursor =db.query("latestlist",columns , null, null, null, null, null);
 	 int num=cursor.getCount();
-	 Log.v("test" , "latestdao getString[] num "+ num);
+	 //Log.v("test" , "latestdao getString[] num "+ num);
 	 if(num>10)
 	     num = 10;
 	 int i=0;
